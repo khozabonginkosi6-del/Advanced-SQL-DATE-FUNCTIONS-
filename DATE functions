@@ -1,0 +1,106 @@
+---#Q1. Employees – Add 6 months
+sql
+SELECT emp_id,
+       name,
+       hire_date,
+       DATEADD(month, 6, hire_date) AS hire_plus_6_months
+FROM employees;
+
+---#Q2. Students – Age in days
+sql
+SELECT student_id,
+       name,
+       DATEDIFF(day, dob, CURRENT_DATE) AS age_in_days
+FROM students;
+
+---Q3. Events – Days remaining
+sql
+SELECT event_id,
+       event_name,
+       DATEDIFF(day, CURRENT_DATE, event_date) AS days_remaining
+FROM events;
+
+---#Q4. Invoices – Days between issue and due
+sql
+SELECT invoice_id,
+       issue_date,
+       due_date,
+       DATEDIFF(day, issue_date, due_date) AS days_between
+FROM invoices;
+
+---#Q5. Courses – Format start_date
+sql
+SELECT course_id,
+       name,
+       TO_VARCHAR(start_date, 'Month YYYY') AS formatted_date
+FROM courses;
+
+---#Q6. Memberships – Build full date
+sql
+SELECT member_id,
+       DATE_FROM_PARTS(start_year, start_month, start_day) AS full_start_date
+FROM memberships;
+
+---#Q7. Subscriptions – Extend renewal by 1 year
+sql
+SELECT sub_id,
+       plan,
+       DATEADD(year, 1, renewal_date) AS extended_renewal_date
+FROM subscriptions;
+
+---#Q8. Orders – Days since order
+sql
+SELECT order_id,
+       order_date,
+       CURRENT_DATE AS today_date,
+       DATEDIFF(day, order_date, CURRENT_DATE) AS days_since_order
+FROM orders;
+
+---#Q9. Trainings – Extract year
+sql
+SELECT training_id,
+       topic,
+       DATE_PART(year, training_date) AS training_year
+FROM trainings;
+
+---#Q10. Blog_Posts – Extract hour and minute
+sql
+SELECT post_id,
+       title,
+       DATE_PART(hour, published_on) AS hour_published,
+       DATE_PART(minute, published_on) AS minute_published
+FROM blog_posts;
+
+---#Q11. Drivers – Days until license expiry
+sql
+SELECT driver_id,
+       license_expiry,
+       DATEDIFF(day, CURRENT_DATE, license_expiry) AS days_left
+FROM drivers;
+
+---#Q12. Messages – Seconds since sent
+sql
+SELECT message_id,
+       sent_timestamp,
+       CURRENT_TIMESTAMP AS current_timestamp,
+       DATEDIFF(second, sent_timestamp, CURRENT_TIMESTAMP) AS seconds_since_sent
+FROM messages;
+
+---#Q13. Returns – Restock date
+sql
+SELECT return_id,
+       return_date,
+       DATEADD(day, 15, return_date) AS restock_date
+FROM returns;
+---#Q14. Assignments – Convert string to date
+sql
+SELECT assign_id,
+       TO_DATE(assigned_on) AS assigned_on_date
+FROM assignments;
+
+---#Q15. Meetings – Format meeting time
+sql
+SELECT meeting_id,
+       TO_VARCHAR(scheduled_time, 'Month DD, YYYY "at" HH:MI AM') AS formatted_meeting_time
+FROM meetings;
+
